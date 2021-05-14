@@ -198,6 +198,33 @@ prob.solve()
 prob.print()
 \end{python}
 
+A program python szegmense később integrálásra került a fő programban. Különböző változásuk után a Goole OR tools lett a végső részmodul, amit erre a célra alkalmaztam. A szintaktikája hasonló a pythonéhoz, de helyenként különbözik. Az előző példa C\# ban a GLOP segítségével megoldva:
+
+A sover létrehozása GLOP-al
+\begin{cpp}
+Solver solver = Solver.CreateSolver("GLOP");
+\end{cpp}
+A változókat itt megadhatjuk egy előre definiált tömbbel, vagy egyesével. A programban konverzió miatt az utóbi lett kiválasztva, mert folyamatosan feltöltető.
+\begin{cpp}
+Variable weights = solver.MakeNumVar(0.0, int.PositiveInfinity, "weight");
+\end{cpp}
+Megkötés hozzáadása: példa belső élre
+\begin{cpp}
+solver.Add(c[2]-c[5]>0);
+\end{cpp}
+A célfüggvény:
+\begin{cpp}
+solver.Minimize(i => costs[i] * trVars[i]);
+\end{cpp}
+Ha kész az előfeltétel, akkor elindítjuk a solvert
+\begin{cpp}
+Solver.ResultStatus resultStatus = solver.Solve();
+\end{cpp}
+Itt a result status tartalmazza a megoldást, ha van, ekkor 'OPTIMAL' al tér vissza, a változók ekkor kinyerhetőek:
+\begin{cpp}
+sb.Add(c[1].SolutionValue());
+\end{cpp}
+
 \Section{Mintafeladat}
 Vegyünk egy 4 helyből és 2 tranzícióból álló rendszert. A helyekből egy nyelő, egy forrás és kettő belső hely. A rendszerben 6 él van az ábrán megadott módon.  A gráfban a sárga elem a helyeket, zöld a tranzíciókat jelöli. A csomópont elemben az első jel a hely kódja, a második a kapcsolódó kapacitás érték. A modellben a kisebb indexű tranzíció AND tulajdonságú, a másik OR tulajdonságú. 
 
@@ -258,3 +285,4 @@ Infeasible
 &$Iv_5$ &: $10.0$
 \end{tabular}
 \end{center}
+

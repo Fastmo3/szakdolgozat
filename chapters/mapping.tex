@@ -273,5 +273,11 @@ A grafikus megjelenítése \aref{fig:flow}. ábrán látható.
 \end{figure}
 Leképzése egyszerű, hisz a megfelelő gyerek elemek nem szekvenciálisan helyezkednek el, hanem párhuzamosan.
 
+Az idáig említett leképzések az egyszerű hálóra lettek bemutatva. Színes háló esetén már sokkal összetettebb a folyamat. Ekkor ugyanis, mivel a színválasztás nem szigorúan meghatározott, a háló módosulhat a színválasztás függvényében. A legcélravezetőbb színválasztás viszont, az alap folyamat egy adott helyén előforduló item-ek más helyen történő előfordulását. Például acélgyártásnál minden olyan folyamat ahol mozatható csille szükséges, tartalmazni fogja a "csille" színű tokent a hálóban. A színezéskor előfordulhat kettő szélsőséges eset, melyek:
+\begin{itemize}
+\item a háló minden pontja ugyan olyan színű, (ekkor a háló gyakorlatilag egyszerű háló)
+\item a háló minden pontja különböző színű, ilyenkor minden node-ra (hely és tranzició) ki kell számolni a szükséges értékeket. (ugyanis nincs "átadó" folyamat, ahol az input megegezik az outputtal)
+\end{itemize}
+
 
 
