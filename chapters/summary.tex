@@ -1,12 +1,8 @@
 \Chapter{Összefoglalás}
 
-A dolgozat témaköre a BPEL nyelven létrehozott üzleti folyamatok modellezése  és elemzése a Petri-háló alapú formalizmus segítségével. A kidolgozott mintarendszer inputként egy BPEL modell leírását várja és kimenetként az elemzés eredményét illetve a folyamatok nyomkövetését adja vissza.
+A feladatot természetesen a BPEL megismerésével kezdtem. Majd miután egy alapvető képem kialakult a rendszerről, megpróbáltam saját magam is BPEL file létrehozását. Különböző próbálkozások után kialakult egy átfogó kép a folyamatokról, illetve a BPEL használhatóságáról. Következő lépés a Petri hálók megismerése.
+A programhoz szükség volt különböző modellekre, melyek a hálót írják le. A modelleket úgy kellett létrehozni, hogy rajtuk egyszerű legyen a tulajdonság vizsgálat, de ennek ellenére leírható legyen egy egész folyamat a teljesség igényével. 
+A hálók vizsgálatához vissza kellett térni a diszkrét matematika, a matematikai logika és automaták és formális nyelvek tárgyból tanultakra. 
 
-A dolgozat keretében az alábbi eredményeket értem el:
-\begin{itemize}
-\item BPEL folyamatok Petri háló formalizmusra történő konverziója,
-\item LP alapú végesség vizsgálat a Petri hálón,
-\item folyamatok grafikus nyomon követése, szimuláció.
-\end{itemize}
-
+Végeredményképp a program képes egy (pseudo) BPEL file feldolgozására. Az inputot konvertálja Petri hálóra a beállítások alapján és az így kapott hálón elemzéseket hajt vére és közli, hogy a háló véges-e, korlátos-e, illetve, van-e szükség belső puffer használatára. A színes háló előállításakor, mivel nem egyértelmű a színezés ezért lehet többféle hálót is létrehozni. A program azonban csak egyet állít elő. Ezt azonban a definíciós szabálykészlet bővítésével könnyen lehet módosítani. Az elkészült hálók a programból megtekinthetők, és rajtuk a tokenáram lépésről lépésre megvizsgálható. 
 
