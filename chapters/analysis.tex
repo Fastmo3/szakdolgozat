@@ -12,8 +12,8 @@ A háló alap tulajdonságainak, beleértve a korlátosságának az elemzésére
 
 A mátrix reprezentáció esetén transzformációs mátrixok segítségével írják fel a Petri háló dinamikáját. Az alapstruktúra az ú.n. incidencia M mátrixban kerül megadásra, melynek elemei az alábbi jelentéssel bírnak: $A_{ij}=a^+_{ij}-a^-_{ij}$, ahol 
 \begin{itemize}
-\item $a^+_{ij}: $ az élerősség az i. tranzícióból a j. kimeneti hely felé
-\item $a^-_{ij}$ az élerősség az i. tranzícióhoz a j. bemeneti hely felől.
+\item $a^+_{ij}: $ az élerősség az i. tranzicióból a j. kimeneti hely felé
+\item $a^-_{ij}$ az élerősség az i. tranzicióhoz a j. bemeneti hely felől.
 \end{itemize}
 
 A mátrix alapvetően a tokenek számának a változását mutatja az egyes tranzició átmenetek esetére. A  Petri háló működési alapegyenlete a következő alakban adható meg: 
@@ -33,11 +33,11 @@ Modellünkben korlátosságnak egy folyam-gráf megközelítését dolgoztuk ki.
 \end{itemize}
 Feltesszük, hogy csak a köztes helyeken lehet tokeneket tárolni, csak ott vannak pufferek. A hálóban az élekhez egy $I_x$ token áramlás erősséget definiálunk, ahol x jelöli az él indexét. A forrás helyekhez egy $Q_x$ forrás erősség indexet adunk meg. A hálóban az alábbi kapacitás korlátokat vezetjük be:
 \begin{itemize}
-\item $C_x:$ az x. tranzíció maximális erőssége,
+\item $C_x:$ az x. tranzició maximális erőssége,
 \item $C_y:$ az y. nyelő maximális folyam erőssége.
 \end{itemize}
 
-A tranzícióknál a bemenő élek vonatkozásában kétféle működési módot értelmezünk:
+A tranzicióknál a bemenő élek vonatkozásában kétféle működési módot értelmezünk:
 \begin{itemize}
 \item AND-mód: akkor van tüzelés, ha minden bejövő élnél megvan az al elvárt tokenszám, van szinkron,
 \item OR-mód: akkor van tüzelés, ha megjelenik valamely bemeneten egy token, nincs szinkron.
@@ -67,11 +67,11 @@ $$F\Rightarrow \min$$ alakú.
 
 \Section{Az alkalmazott, kibővített modell színezett hálóra}
 
-A színezett Petri-hálók esetén több különböző típusú tokenek élnek a rendszerben. A kapacitás vizsgálatnál ekkor az egyes tranzícióknál eltérő lehet a kapacitás korlát (a maximális folyam erősség) a különböző típusú tokenek esetén. Emiatt külön kell vizsgálni az egyes típusok folyam erősségét, nem lehet összevonni őket.
+A színezett Petri-hálók esetén több különböző típusú tokenek élnek a rendszerben. A kapacitás vizsgálatnál ekkor az egyes tranzicióknál eltérő lehet a kapacitás korlát (a maximális folyam erősség) a különböző típusú tokenek esetén. Emiatt külön kell vizsgálni az egyes típusok folyam erősségét, nem lehet összevonni őket.
 
 A színezett hálóban az élekhez $I^c_x$ token áramlás erősségeket definiálunk, ahol $x$ jelöli az él indexét és $c$ a színkód. A forrás helyekhez $Q^c_x$ forrás erősség indexeket adunk meg a különböző $c$ színekre vonatkozólag. A hálóban az alábbi kapacitás korlátokat vezetjük be:
 \begin{itemize}
-\item $C^C_x$: az $x$. tranzíció maximális erőssége a c szín esetén 
+\item $C^C_x$: az $x$. tranzició maximális erőssége a c szín esetén 
 \item $C^C_y$: az $y$. nyelő maximális folyam erőssége a c szín esetén
 \end{itemize}
 A hálóban az alábbi megkötések élnek a folyamerősségekre:
@@ -79,7 +79,7 @@ A hálóban az alábbi megkötések élnek a folyamerősségekre:
 \item forrás helyek ($x$) esetén: $\forall c$ színre: $\sum_{y\text{ kimenő élek}}I^C_Y = Q^C_x$
 \item nyelő helyek ($x$) esetén: $\forall c$ színre: $\sum_{y\text{ bejövő élek}}I^C_y \leq C^C_x$
 \item belső helyek esetén: $\forall c$ színre: $\sum_{y\text{ kimenő élek}} I^C_y \leq \sum_{y\text{ bejövő élek}}$
-\item tranzíciók ($x$) esetén:
+\item tranziciók ($x$) esetén:
 $$\forall c \text{ színre} \sum_{y\text{ kimenő élek}} I^C_y == \sum_{y\text{ bejövő élek}} I^C_y $$
 $$\sum_{c \text{ színek}}\left( \frac{1}{C^C_x} \left( \sum_{y \text{ bejövő élek}} I^C_y \right) \right) \leq 1$$
 $$\forall c \text{ színre:} \forall \text{ kimenő} (y,z) \text{élre: } I^C_y=I^C_z$$
@@ -92,7 +92,7 @@ A fenti feladat egy lineáris programozási feladatnak (röviden LP) is tekinthe
 \newpage
 \Section{A validációs számítás algoritmusa}
 
-A hálót leíró struktúra három alappilléren nyugszik: helyek, tranzíciók, élek.
+A hálót leíró struktúra három alappilléren nyugszik: helyek, tranziciók, élek.
 
 A helyek esetén az alábbi attribútumokat tárolja a rendszer:
 \begin{itemize}
@@ -204,7 +204,7 @@ A sover létrehozása GLOP-al
 \begin{cpp}
 Solver solver = Solver.CreateSolver("GLOP");
 \end{cpp}
-A változókat itt megadhatjuk egy előre definiált tömbbel, vagy egyesével. A programban konverzió miatt az utóbi lett kiválasztva, mert folyamatosan feltöltető.
+A változókat itt megadhatjuk egy előre definiált tömbbel, vagy egyesével. A programban konverzió miatt az utóbbi lett kiválasztva, mert folyamatosan feltöltető.
 \begin{cpp}
 Variable weights = solver.MakeNumVar(0.0, int.PositiveInfinity, "weight");
 \end{cpp}
@@ -220,13 +220,13 @@ Ha kész az előfeltétel, akkor elindítjuk a solvert
 \begin{cpp}
 Solver.ResultStatus resultStatus = solver.Solve();
 \end{cpp}
-Itt a result status tartalmazza a megoldást, ha van, ekkor 'OPTIMAL' al tér vissza, a változók ekkor kinyerhetőek:
+Itt a result status tartalmazza a megoldást, ha van, ekkor 'OPTIMAL'-al tér vissza, a változók ekkor kinyerhetőek:
 \begin{cpp}
 sb.Add(c[1].SolutionValue());
 \end{cpp}
 
 \Section{Mintafeladat}
-Vegyünk egy 4 helyből és 2 tranzícióból álló rendszert. A helyekből egy nyelő, egy forrás és kettő belső hely. A rendszerben 6 él van az ábrán megadott módon.  A gráfban a sárga elem a helyeket, zöld a tranzíciókat jelöli. A csomópont elemben az első jel a hely kódja, a második a kapcsolódó kapacitás érték. A modellben a kisebb indexű tranzíció AND tulajdonságú, a másik OR tulajdonságú. 
+Vegyünk egy 4 helyből és 2 tranzicióból álló rendszert. A helyekből egy nyelő, egy forrás és kettő belső hely. A rendszerben 6 él van az ábrán megadott módon.  A gráfban a sárga elem a helyeket, zöld a tranziciókat jelöli. A csomópont elemben az első jel a hely kódja, a második a kapcsolódó kapacitás érték. A modellben a kisebb indexű tranzició AND tulajdonságú, a másik OR tulajdonságú. 
 
 A rendszerben 6 (nem negatív) változó jelenik meg:  $\{0: Iv_0, 1: Iv_1, 2: Iv_2, 3: Iv_3, 4: Iv_4, 5: Iv_5\}$
 
@@ -273,7 +273,7 @@ Az LP feladat megoldható és a kapott megoldás:
 \end{tabular}
 \end{center}
 Tehát a mintarendszerben nincs szükség belső pufferre. 
-Ha lecsökkentjük a második tranzíció folyamerősségét, az akkor nem kapunk érvényes megoldást. \\
+Ha lecsökkentjük a második tranzició folyamerősségét, az akkor nem kapunk érvényes megoldást. \\
 Infeasible
 \begin{center}
 \begin{tabular}{rll}

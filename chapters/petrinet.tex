@@ -36,7 +36,7 @@ struktúra, ahol
 \item $\Sigma$: a színek halmazainak halmaza, 
 \item $V$: a változók halmaza, ahol $\forall v\in V$: változóhoz egy $Type[v] \in \Sigma $ típus rendelhető,
 \item $C: P\rightarrow \Sigma$: a helyekhez színeket rendelő függvény,
-\item $G: T\rightarrow EXPR_V$: az egyes tranzíciókhoz kapcsolódó validációs, ellenőrzési kifejezés (logikai értékű),
+\item $G: T\rightarrow EXPR_V$: az egyes tranziciókhoz kapcsolódó validációs, ellenőrzési kifejezés (logikai értékű),
 \item $E: A\rightarrow EXPR_V$: az egyes élekhez kapcsolódó kifejezés, amely a kapcsolódó hely színhalmazához tartozó értéket vehet fel,
 \item $S: P\Rightarrow N^+$: a kezdőállapot.
 \end{itemize}
@@ -45,11 +45,11 @@ Adott $CPN(P, T, A, \Sigma, V, C, G, E, S)$ színezett hálóhoz az alábbi keze
 \begin{itemize}
 \item $M(p)$: a jelölő (\textit{marker}) függvény, melynek értéke a $p$ helyhez kapcsolódó tokenek halmaza (színezett Petri háló esetén az $M(p)$ elemek színeinek illeszkedni kell a $C(p)$ színhalmazhoz),
 \item $M_0(p)$: helyek induló tokenkészlete,
-\item $Var(t)$: a tranzíciók viselkedését leíró változók halmaza,
+\item $Var(t)$: a tranziciók viselkedését leíró változók halmaza,
 \item $b(v)$: az adott $v$ változó értékét megadó kifejezés, ahol $b(v) \in Type[v]$.
 \end{itemize}
 
-Egy $t$ tranzíció esetén a $Var(t)$ kifejezés a tranzícióhoz rendelt változók együttese, ahol a változók a $G(t)$ vagy $E$(a: t-hez kötődő él) kifejezésekben szerepelnek.
+Egy $t$ tranzició esetén a $Var(t)$ kifejezés a tranzicióhoz rendelt változók együttese, ahol a változók a $G(t)$ vagy $E$(a: t-hez kötődő él) kifejezésekben szerepelnek.
 Az egyes esetekhez tartozó halmazok tehát az alábbiak.
 \begin{equation*}
 Var(t)=\begin{cases}
@@ -61,7 +61,7 @@ Var(t)=\begin{cases}
 \end{cases}
 \end{equation*}
 
-A hálóban egy tranzíció akkor engedélyezett (\textit{ready}), ha a bemenő helyeknél a kívánt tokenszám megtalálható.
+A hálóban egy tranzició akkor engedélyezett (\textit{ready}), ha a bemenő helyeknél a kívánt tokenszám megtalálható.
 Jelölt hálók esetében:
 \[
 M'(p)=M(p)-I(p,t)+O(p,t): \forall p\in P,
@@ -83,7 +83,7 @@ A hierarchikus CPN rendszerben az átláthatóság növelése érdekében össze
 
 A moduloknál fontos szerepet kapnak az átadó helyek, melyeken keresztül a tokenek bejöhetnek a modulba illetve kiléphetnek a modulból. Az ilyen port jellegű helyek lehetnek bemeneti portok (IN) illetve kimeneti portok (OUT).  
 
-A CPN rendszerek egyik hasznos tulajdonsága, hogy lehetőséget adnak a felépített modell formális ellenőrzésére, validálására és értékelésére. A formális ellenőrzés egyik leggyakoribb eszköze az állapottér (\textit{state space})  modell, ahol az állapottér egy olyan irányított gráf, melyben a csomópontok a háló egy lehetséges  $M(CPN)$ jelölési állapota. Azaz a háló struktúrája rögzített, de az egyes elemeknél a tokenek és változók halmaza, azok állapota változhat. A véges állapottér modellt rendszerint szimulációkal állítják elő. 
+A CPN rendszerek egyik hasznos tulajdonsága, hogy lehetőséget adnak a felépített modell formális ellenőrzésére, validálására és értékelésére. A formális ellenőrzés egyik leggyakoribb eszköze az állapottér (\textit{state space})  modell, ahol az állapottér egy olyan irányított gráf, melyben a csomópontok a háló egy lehetséges  $M(CPN)$ jelölési állapota. Azaz a háló struktúrája rögzített, de az egyes elemeknél a tokenek és változók halmaza, azok állapota változhat. A véges állapottér modellt rendszerint szimulációkkal állítják elő. 
 
 Az állapottér modellből kiindulva további elemzésekre ad lehetőséget a komponens gráf modell (\textit{Strongly Connected Component Graph}, röviden SCC) formalizmus. Az SCC gráfból a rendszer általános viselkedési szabályaira lehet következtetni. Az SCC gráf olyan gráf, melynek csomópontjai az állapottér azon diszjunkt részhalmazai, ahol egy részhalmaz bármely két elemére igaz, hogy az egyik elem  elérhető a másikból. 
 

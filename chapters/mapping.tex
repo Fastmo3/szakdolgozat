@@ -16,9 +16,9 @@ Az elemi tevékenységekből összetett folyamatok építhetőek fel szekvencia,
 A BPEL szabvány tevékenység készletének bemutatásánál csak a legfontosabb elemekre térünk most ki. A szabvány részletei a
 http://docs.oasis-open.org/wsbpel/2.0/OS/wsbpel-v2.0-OS.html weboldalról érhetőek el. 
 
-A BPEL definíció egyértelműsíti a folyamat kezdetét és inicializálja is a megfelelő paraméterekkel. A Petri háló erre nem tér ki, ezért bevezetünk egy opcionális \textit{START} tranazíciót. Ennek feladata, a megfelelő tokenek legenerálása a folyamat indításához. A folyamat zárása szintén egyértelmű a BPEL szabványban. Petri háló kapcsán beszélhetünk a háló leállásáról, ha már semmilyen hely és tranzíció nem produkál új tokent, nem várakozik és nem nyel el tokent. A köztes elemek leképzése általánosan nem bonyolult, de megvizsgálhatók alternatív leképzési módok. 
+A BPEL definíció egyértelműsíti a folyamat kezdetét és inicializálja is a megfelelő paraméterekkel. A Petri háló erre nem tér ki, ezért bevezetünk egy opcionális \textit{START} tranazíciót. Ennek feladata, a megfelelő tokenek legenerálása a folyamat indításához. A folyamat zárása szintén egyértelmű a BPEL szabványban. Petri háló kapcsán beszélhetünk a háló leállásáról, ha már semmilyen hely és tranzició nem produkál új tokent, nem várakozik és nem nyel el tokent. A köztes elemek leképzése általánosan nem bonyolult, de megvizsgálhatók alternatív leképzési módok. 
 
-Az alkalmazás jelölésrendszere: A rendszer a helyeket P-vel, míg a tranzíciókat T-vel indexeli. A helyek után listázza az adott helyen levő tokeneket. A jelenleg lépésben levő tranzíciók pedig színes kitöltést kapnak. Alább egy pár, esetenként nem triviális elem leképzése látható, a többi elem leképzése és magyarázata a mellékletek között található.
+Az alkalmazás jelölésrendszere: A rendszer a helyeket P-vel, míg a tranziciókat T-vel indexeli. A helyek után listázza az adott helyen levő tokeneket. A jelenleg lépésben levő tranziciók pedig színes kitöltést kapnak. Alább egy pár, esetenként nem triviális elem leképzése látható, a többi elem leképzése és magyarázata a mellékletek között található.
 
 \Section{\texttt{<invoke>}}
 Egy BPEL vagy épp egy webszolgáltatás meghívására szolgál és definiálja a szolgáltatás feladatát is. 
@@ -70,7 +70,7 @@ Egy változó értékadására szolgáló esemény. Ellentétben egy imperatív 
    </copy>
 </assign>
 \end{verbatim}
-Az érték hozzárendelése nagyon egszerűen átírható egy tranzicióra ami a megfelelő tokenek színét módosítja. 
+Az érték hozzárendelése nagyon egyszerűen átírható egy tranzicióra ami a megfelelő tokenek színét módosítja. 
 A grafikus megjelenítése \aref{fig:assign}. ábrán látható.
 A színmódosítás egyszerűen a token nevének átírását jelenti. 
 \begin{figure}[h!]
@@ -248,7 +248,7 @@ A grafikus megjelenítése \aref{fig:pick}. ábrán látható.
 \label{fig:pick}
 \end{figure}
 
-Összetartó hálóval és egy tranzícióval képezhető le.
+Összetartó hálóval és egy tranzicióval képezhető le.
 
 
 \Section{\texttt{<flow>}}
