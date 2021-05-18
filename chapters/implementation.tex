@@ -52,9 +52,11 @@ A fejezet elején elmondottak alapján a projektet csak 4.7.2-es .NET alatt lehe
 \subsection{FileManager / Parser }
 A File manager a C\# hagyományos XML megoldásait használja, ez az \textbf{XmlDocument} és \textbf{XmlReader} osztály illetve a hozzá tartozó metódusok. A felhasználói felületen a felhasználó által kiválasztott file kerül a managerbe. A C\# támogatja az XML fileok hagyományos XPath alapú feldolgozását, azonban elérhető egy gyorsabb XML feldolgozás LINQ-val. A LINQ a C\# nyelvbe integrált query nyelv. Szintaktikája az SQL éhez hasonló annyi különbséggel, hogy a 'SELECT' a query végére kerül az eleje helyett. Ez főként a kódban előforduló lekérdezések elkülönülése miatt lett így tervezve. A LINQ része továbbá a Lambda expression parser is, ami hasonló lekérdezéseket tud generáli, illetve feldolgozni. 
 A forrásfile beolvasása és feldolgozása kicsit bonyolultabb, mint egy sima adat XML, hiszen az adat XML nem lehet tetszőleges mély. A BPEL ezzel ellentétben elvileg igen, viszont az ilyen file olvasása több szempontból is nehézkes. Egyrészt rekurziót kell alkalmazni, ami ha nem vigyázunk nagyon hamar tele szemeteli a memóriát, illetve okozhat futásidejű hibákat is, ha például nem olyan elem van a legmélyebb szinten, mint amit vár, például sima szöveg valamilyen element helyett. BPEL során annyi könnyítést meg lehet tenni, hogy a tetszőleges mélységet előtte elhagyom, és invoke-okkal saját processen belül generálok egy új sequence-t. Az így kapott file maximum 3 szint mély lehet (a rootot leszámolva). Ezt a funkciót nem építettem bele a programba, hiszen akkor kétszer kéne végig menni ugyan azon a forrás file-on.
-Ez a programban a következő kép néz ki:
+Ez a programban a következő kép néz ki (a következő oldalon):
+\newpage
+\begin{landscape}
 \begin{cpp}
- XmlDocument bpelSource = new XmlDocument();
+  XmlDocument bpelSource = new XmlDocument();
             bpelSource.Load(openFileDialog.FileName);
             XmlElement root = bpelSource.DocumentElement;
             Process process = new Process();
@@ -68,6 +70,18 @@ Ez a programban a következő kép néz ki:
                 foreach (XmlElement child in childs)
                 {
                     var bpelElement = new BpelElement();
+                    if (child.HasChildNodes)
+                    {
+                        foreach (XmlElement innerChild in child.ChildNodes)
+                        {
+                            var innerElement = new BpelElement();
+                            foreach (XmlAttribute attribute in innerChild.Attributes)
+                            {
+                                innerElement.attributes[attribute.Name] = attribute.Value;
+                            }
+                            bpelElement.ownBpelElements.Add(innerElement);
+                        }
+                    }
                     foreach (XmlAttribute attribute in child.Attributes)
                     {
                         bpelElement.attributes[attribute.Name] = attribute.Value;
@@ -82,8 +96,7 @@ Ez a programban a következő kép néz ki:
             }
             process.bpelSequence = sequences;
 \end{cpp}
- 
-Innentől a sequences ben tárolódik el a file folyamatai. 
+\end{landscape}
 \subsection{Converter}
 A Converter a program fő modulja. A leképzés fejezetben felsorolt nyelvi elemeket dolgozza fel és készíti el a részhálókat, amiket aztán összefűz. Konverzió során az XML soronként kerül feldolgozásra. Egy átolvasás után a nem szorosan illeszkedő részek, mint részhálók, segéd folyamatok stb. külön szálak kerülnek feldolgozásra aszinkron módon. Ezzel a konverziós idő (a modelltől függően) rövidül. A konverzió gyakorlatilag egy keresés egy Dictionaryben. A Dictionary egy kulcsot vár ami alapján egy értéket ad vissza. (Pont, mint egy valós szótár, ahol a kulcs az idegen nyelvű szó, az érték pedig a szó magyar megfelelője). Egy kisebb méretű Dictionary keresés durván $O(n)$ , ha $n$ darab elemre keresünk, ugyanis a \texttt{Dictionary.Contains()} egy elemre $O(1)$ komplexitású. Keresés után ezeket még rendezni kell és összefűzni. Ez utóbbi szintén minden elemre végbemegy, de ve egyidejűleg egy validáció is. A konverzió során az XML elem attribútumai és gyerekei alapján kerül az elem a háló egy adott pontjára. Ez egy újabb $O(n)$ lépés. Ha a rész szálak kész vannak és a fő szál is elkészült a részek egy hálóba lesznek rendezve ami $O(s)$, ahol az $s$ a részhálók száma. Idáig a program tehát $O(2n+s)$ lépést tesz meg. 
 \subsection{Analyzer}
