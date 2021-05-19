@@ -4,7 +4,7 @@
 
 %TODO Megnézni, hogy az egyes elemek esetében milyen alternatívák lennének a leképzésre!
 \Section{A leképzés menete}
-A BPEL nyelv az egymással együttműködő modulok működését szimulálja. A BPEL  modellben a folyamat lépéseit tevékenységnek \textsl{activity} nevezzük. A tevékenységek lehetnek elemiek és összetettek. Tipikus elemi tevékenységek:
+A BPEL nyelv az egymással együttműködő modulok működését szimulálja. A BPEL  modellben a folyamat lépéseit tevékenységnek \textsl{(activity)} nevezzük. A tevékenységek lehetnek elemiek és összetettek. Tipikus elemi tevékenységek:
 \begin{itemize}
 \item más funkció meghívása,
 \item üzenet küldés/fogadás,
@@ -16,7 +16,7 @@ Az elemi tevékenységekből összetett folyamatok építhetőek fel szekvencia,
 A BPEL szabvány tevékenység készletének bemutatásánál csak a legfontosabb elemekre térünk most ki. A szabvány részletei a \\
 http://docs.oasis-open.org/wsbpel/2.0/OS/wsbpel-v2.0-OS.html weboldalról érhetőek el. 
 
-A BPEL definíció egyértelműsíti a folyamat kezdetét és inicializálja is a megfelelő paraméterekkel. A Petri háló erre nem tér ki, ezért bevezetünk egy opcionális \textit{START} tranazíciót. Ennek feladata, a megfelelő tokenek legenerálása a folyamat indításához. A folyamat zárása szintén egyértelmű a BPEL szabványban. Petri háló kapcsán beszélhetünk a háló leállásáról, ha már semmilyen hely és tranzició nem produkál új tokent, nem várakozik és nem nyel el tokent. A köztes elemek leképzése általánosan nem bonyolult, de megvizsgálhatók alternatív leképzési módok. 
+A BPEL definíció egyértelműsíti a folyamat kezdetét és inicializálja is a megfelelő paraméterekkel. A Petri háló erre nem tér ki, ezért bevezetünk egy opcionális \textit{START} tranziciót. Ennek feladata, a megfelelő tokenek legenerálása a folyamat indításához. A folyamat zárása szintén egyértelmű a BPEL szabványban. Petri háló kapcsán beszélhetünk a háló leállásáról, ha már semmilyen hely és tranzició nem produkál új tokent, nem várakozik és nem nyel el tokent. A köztes elemek leképzése általánosan nem bonyolult, de megvizsgálhatók alternatív leképzési módok. 
 
 Az alkalmazás jelölésrendszere: A rendszer a helyeket P-vel, míg a tranziciókat T-vel indexeli. A helyek után listázza az adott helyen levő tokeneket. A jelenleg lépésben levő tranziciók pedig színes kitöltést kapnak. Alább egy pár, esetenként nem triviális elem leképzése látható, a többi elem leképzése és magyarázata a mellékletek között található.
 
@@ -120,7 +120,7 @@ Időre vonatkoztatva várakoztat. Például 5000 tick vagy 14:00:23 (hh:mm:ss)
    )
 </wait>
 \end{verbatim}
-Megadható egy részhálóval ami valójában egy oszcillátor és a megfelelő iteráció után folytat tokent küld. Továbbá létezik úgynevezett időérzékeny háló, ahol az elemek tokenátadási sebessége ismert, vagy állítható. Ezzel időzítőt lehet létrehozni. Esetenként hardware-es óra is használható
+Megadható egy részhálóval ami valójában egy oszcillátor, és a megfelelő iteráció után \emph{continue} tokent küld. Továbbá létezik úgynevezett időérzékeny háló, ahol az elemek tokenátadási sebessége ismert, vagy állítható. Ezzel időzítőt lehet létrehozni. Esetenként hardware-es óra is használható.
 
 \Section{\texttt{<empty>}}
 No-op (\textit{no operations}) esemény szinkronizációra szolgál.
@@ -158,7 +158,7 @@ Egyszerűen csak tranziciók és helyek összefűzése.
    </else>
 </if>
 \end{verbatim}
-Egy tranzició, mely tokenek függvényében más felé küldi tovább, vagy generál tokeneket. Ez lehet egy helyen összegyúlt tokenek mennyisége, vagy egy adott helyen egy specifikus színű token megléte, vagy nemléte. Analóg módon egy \textit{Switch-Case} elágazás is definiálható vele.
+Egy tranzició, mely tokenek függvényében más felé küldi tovább, vagy generál tokeneket. Ez lehet egy helyen összegyűlt tokenek mennyisége, vagy egy adott helyen egy specifikus színű token megléte, vagy nemléte. Analóg módon egy \textit{Switch-Case} elágazás is definiálható vele.
 A PBEL-es grafikus megjelenítése \aref{fig:if}. ábrán látható.
 
 \begin{figure}[h!]
@@ -177,7 +177,7 @@ A PBEL-es grafikus megjelenítése \aref{fig:if}. ábrán látható.
 \end{figure}
 
 \Section{\texttt{<while>}}
-Elöltesztelős ciklus. Addig iterál, amíg az ciklus feltétel igaznak értékelődik ki. 
+Elöltesztelő ciklus. Addig iterál, amíg az ciklus feltétel igaznak értékelődik ki. 
 \begin{verbatim}
 <while standard-attributes>
    <condition>bool-expr</condition>
@@ -198,7 +198,7 @@ Egy hátultesztelős ciklusnak feleltethető meg, amely akkor enged tovább, ha 
 A \texttt{<while>}-al analóg módon megadható a Petri-hálós leképzése.
 
 \Section{\texttt{<forEach>}}
-Végig iterál a gyerekelemeken. Megadható párhuzamos feldolgozás is. Egy \textit{Complete condition} segítségével megadható egy break utasítás ami kilép a ciklusból. 
+Végig iterál a gyerekelemeken. Megadható párhuzamos feldolgozás is. Egy \textit{Complete condition} segítségével megadható egy break utasítás, ami kilép a ciklusból. 
 \begin{verbatim}
 <forEach counterName="BPELVariableName" parallel="yes|no">
    <startCounterValue expressionLanguage="anyURI"?>
@@ -273,10 +273,10 @@ A grafikus megjelenítése \aref{fig:flow}. ábrán látható.
 \end{figure}
 Leképzése egyszerű, hisz a megfelelő gyerek elemek nem szekvenciálisan helyezkednek el, hanem párhuzamosan.
 
-Az idáig említett leképzések az egyszerű hálóra lettek bemutatva. Színes háló esetén már sokkal összetettebb a folyamat. Ekkor ugyanis, mivel a színválasztás nem szigorúan meghatározott, a háló módosulhat a színválasztás függvényében. A legcélravezetőbb színválasztás viszont, az alap folyamat egy adott helyén előforduló item-ek más helyen történő előfordulását. Például acélgyártásnál minden olyan folyamat ahol mozatható csille szükséges, tartalmazni fogja a "csille" színű tokent a hálóban. A színezéskor előfordulhat kettő szélsőséges eset, melyek:
+Az idáig említett leképzések az egyszerű hálóra lettek bemutatva. Színes háló esetén már sokkal összetettebb a folyamat. Ekkor ugyanis, mivel a színválasztás nem szigorúan meghatározott, a háló módosulhat a színválasztás függvényében. A legcélravezetőbb színválasztás viszont, az alap folyamat egy adott helyén előforduló item-ek más helyen történő előfordulását. Például acélgyártásnál minden olyan folyamat, ahol mozatható csille szükséges, tartalmazni fogja a "csille" színű tokent a hálóban. A színezéskor előfordulhat kettő szélsőséges eset, melyek:
 \begin{itemize}
-\item a háló minden pontja ugyan olyan színű, (ekkor a háló gyakorlatilag egyszerű háló)
-\item a háló minden pontja különböző színű, ilyenkor minden node-ra (hely és tranzició) ki kell számolni a szükséges értékeket. (ugyanis nincs "átadó" folyamat, ahol az input megegezik az outputtal)
+\item a háló minden pontja ugyan olyan színű, (ekkor a háló gyakorlatilag egyszerű háló),
+\item a háló minden pontja különböző színű, ilyenkor minden node-ra (hely és tranzició) ki kell számolni a szükséges értékeket (ugyanis nincs "átadó" folyamat, ahol az input megegezik az outputtal).
 \end{itemize}
 
 

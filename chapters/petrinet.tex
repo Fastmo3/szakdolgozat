@@ -68,8 +68,8 @@ M'(p)=M(p)-I(p,t)+O(p,t): \forall p\in P,
 \]
 ahol 
 \begin{itemize}
-\item $I:F\Rightarrow N^+:$  bejövő áram, intenzitás
-\item $O:F\Rightarrow N^+:$ kimenő áram. intenzitás
+\item $I:F\Rightarrow N^+:$  bejövő áram, intenzitás,
+\item $O:F\Rightarrow N^+:$ kimenő áram, intenzitás.
 \end{itemize}
 
 A hierarchikus CPN rendszerben az átláthatóság növelése érdekében összefogó modulokat is lehet alkalmazni. Egy modul más elemi egységek együttese, tárolója (\ref{fig:schema}. ábra).
@@ -81,7 +81,7 @@ A hierarchikus CPN rendszerben az átláthatóság növelése érdekében össze
 \label{fig:schema}
 \end{figure}
 
-A moduloknál fontos szerepet kapnak az átadó helyek, melyeken keresztül a tokenek bejöhetnek a modulba illetve kiléphetnek a modulból. Az ilyen port jellegű helyek lehetnek bemeneti portok (IN) illetve kimeneti portok (OUT).  
+A moduloknál fontos szerepet kapnak az átadó helyek, melyeken keresztül a tokenek bejöhetnek a modulba, illetve kiléphetnek a modulból. Az ilyen port jellegű helyek lehetnek bemeneti portok (IN), illetve kimeneti portok (OUT).  
 
 A CPN rendszerek egyik hasznos tulajdonsága, hogy lehetőséget adnak a felépített modell formális ellenőrzésére, validálására és értékelésére. A formális ellenőrzés egyik leggyakoribb eszköze az állapottér (\textit{state space})  modell, ahol az állapottér egy olyan irányított gráf, melyben a csomópontok a háló egy lehetséges  $M(CPN)$ jelölési állapota. Azaz a háló struktúrája rögzített, de az egyes elemeknél a tokenek és változók halmaza, azok állapota változhat. A véges állapottér modellt rendszerint szimulációkkal állítják elő. 
 

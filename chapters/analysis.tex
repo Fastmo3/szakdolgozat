@@ -10,9 +10,9 @@ A háló alap tulajdonságainak, beleértve a korlátosságának az elemzésére
 \item dekompozíciós módszerek.
 \end{itemize}
 
-A mátrix reprezentáció esetén transzformációs mátrixok segítségével írják fel a Petri háló dinamikáját. Az alapstruktúra az ú.n. incidencia M mátrixban kerül megadásra, melynek elemei az alábbi jelentéssel bírnak: $A_{ij}=a^+_{ij}-a^-_{ij}$, ahol 
+A mátrix reprezentáció esetén transzformációs mátrixok segítségével írják fel a Petri háló dinamikáját. Az alapstruktúra az ú.n. incidencia $M$ mátrixban kerül megadásra, melynek elemei az alábbi jelentéssel bírnak: $A_{ij}=a^+_{ij}-a^-_{ij}$, ahol 
 \begin{itemize}
-\item $a^+_{ij}: $ az élerősség az i. tranzicióból a j. kimeneti hely felé
+\item $a^+_{ij}: $ az élerősség az i. tranzicióból a j. kimeneti hely felé,
 \item $a^-_{ij}$ az élerősség az i. tranzicióhoz a j. bemeneti hely felől.
 \end{itemize}
 
@@ -31,10 +31,10 @@ Modellünkben korlátosságnak egy folyam-gráf megközelítését dolgoztuk ki.
 \item nyelő hely,
 \item köztes hely.
 \end{itemize}
-Feltesszük, hogy csak a köztes helyeken lehet tokeneket tárolni, csak ott vannak pufferek. A hálóban az élekhez egy $I_x$ token áramlás erősséget definiálunk, ahol x jelöli az él indexét. A forrás helyekhez egy $Q_x$ forrás erősség indexet adunk meg. A hálóban az alábbi kapacitás korlátokat vezetjük be:
+Feltesszük, hogy csak a köztes helyeken lehet tokeneket tárolni, csak ott vannak pufferek. A hálóban az élekhez egy $I_x$ token áramlás erősséget definiálunk, ahol $x$ jelöli az él indexét. A forrás helyekhez egy $Q_x$ forrás erősség indexet adunk meg. A hálóban az alábbi kapacitás korlátokat vezetjük be:
 \begin{itemize}
-\item $C_x:$ az x. tranzició maximális erőssége,
-\item $C_y:$ az y. nyelő maximális folyam erőssége.
+\item $C_x:$ az $x$. tranzició maximális erőssége,
+\item $C_y:$ az $y$. nyelő maximális folyam erőssége.
 \end{itemize}
 
 A tranzicióknál a bemenő élek vonatkozásában kétféle működési módot értelmezünk:
@@ -62,8 +62,8 @@ Az egyes belső helyeken a pufferbe áramló tokenek  eredő intentitása:
 $$F= \sum_{x(\text{belső hely})} \left( \sum_{y(\text{x bejövő él})} I_y - \sum_{y(\text{x kimenő él})} I_y \right)$$
 Az $F$ függvény 0 értéke esetén nincs szükség belső pufferre.
 
-A fenti feladatot egy LP programozási feladatnak is tekinthető, ahol a változók az élek $I_x$ nem negatív intenzitásai és a célfüggvény:
-$$F\Rightarrow \min$$ alakú.
+A fenti feladat egy LP programozási feladatnak is tekinthető, ahol a változók az élek $I_x$ nem negatív intenzitásai, és a célfüggvény:
+$$F\rightarrow \min$$ alakú.
 
 \Section{Az alkalmazott, kibővített modell színezett hálóra}
 
@@ -71,19 +71,19 @@ A színezett Petri-hálók esetén több különböző típusú tokenek élnek a
 
 A színezett hálóban az élekhez $I^c_x$ token áramlás erősségeket definiálunk, ahol $x$ jelöli az él indexét és $c$ a színkód. A forrás helyekhez $Q^c_x$ forrás erősség indexeket adunk meg a különböző $c$ színekre vonatkozólag. A hálóban az alábbi kapacitás korlátokat vezetjük be:
 \begin{itemize}
-\item $C^C_x$: az $x$. tranzició maximális erőssége a c szín esetén 
-\item $C^C_y$: az $y$. nyelő maximális folyam erőssége a c szín esetén
+\item $C^C_x$: az $x$. tranzició maximális erőssége a $c$ szín esetén 
+\item $C^C_y$: az $y$. nyelő maximális folyam erőssége a $c$ szín esetén
 \end{itemize}
 A hálóban az alábbi megkötések élnek a folyamerősségekre:
 \begin{itemize}
-\item forrás helyek ($x$) esetén: $\forall c$ színre: $\sum_{y\text{ kimenő élek}}I^C_Y = Q^C_x$
-\item nyelő helyek ($x$) esetén: $\forall c$ színre: $\sum_{y\text{ bejövő élek}}I^C_y \leq C^C_x$
-\item belső helyek esetén: $\forall c$ színre: $\sum_{y\text{ kimenő élek}} I^C_y \leq \sum_{y\text{ bejövő élek}}$
+\item forrás helyek ($x$) esetén: $\forall c$ színre: $\sum_{y\text{ kimenő élek}}I^C_Y = Q^C_x$,
+\item nyelő helyek ($x$) esetén: $\forall c$ színre: $\sum_{y\text{ bejövő élek}}I^C_y \leq C^C_x$,
+\item belső helyek esetén: $\forall c$ színre: $\sum_{y\text{ kimenő élek}} I^C_y \leq \sum_{y\text{ bejövő élek}}$,
 \item tranziciók ($x$) esetén:
-$$\forall c \text{ színre} \sum_{y\text{ kimenő élek}} I^C_y == \sum_{y\text{ bejövő élek}} I^C_y $$
-$$\sum_{c \text{ színek}}\left( \frac{1}{C^C_x} \left( \sum_{y \text{ bejövő élek}} I^C_y \right) \right) \leq 1$$
-$$\forall c \text{ színre:} \forall \text{ kimenő} (y,z) \text{élre: } I^C_y=I^C_z$$
-\item az AND típusú tranzakciók esetén még ezen felül teljesül, hogy 	$\forall c$ színre: $\forall$ bejövő $(y,z)$ élre $I^C_y=I^C_z$
+$$\forall c \text{ színre} \sum_{y\text{ kimenő élek}} I^C_y == \sum_{y\text{ bejövő élek}} I^C_y $$,
+$$\sum_{c \text{ színek}}\left( \frac{1}{C^C_x} \left( \sum_{y \text{ bejövő élek}} I^C_y \right) \right) \leq 1$$,
+$$\forall c \text{ színre:} \forall \text{ kimenő} (y,z) \text{élre: } I^C_y=I^C_z$$,
+\item az AND típusú tranzakciók esetén még ezen felül teljesül, hogy 	$\forall c$ színre: $\forall$ bejövő $(y,z)$ élre $I^C_y=I^C_z$.
 \end{itemize}
 Az egyes belső helyeken a bufferbe áramló tokenek  eredő intenzitása:
 $$F=\sum_{c\text{ színek}} \left( \sum_{x\text{ belső hely}}\left( \sum_{y\text{ bejövő élek }x\text{-nél}}I^C_y - \sum_{y \text{ kimenő helyek }x\text{-nél}} I^C_y \right) \right).$$
@@ -150,9 +150,16 @@ sb.Add(c[1].SolutionValue());
 \end{cpp}
 
 \Section{Mintafeladat}
-Vegyünk egy 4 helyből és 2 tranzicióból álló rendszert. A helyekből egy nyelő, egy forrás és kettő belső hely. A rendszerben 6 él van az ábrán megadott módon.  A gráfban a sárga elem a helyeket, zöld a tranziciókat jelöli. A csomópont elemben az első jel a hely kódja, a második a kapcsolódó kapacitás érték. A modellben a kisebb indexű tranzició AND tulajdonságú, a másik OR tulajdonságú. 
+Vegyünk egy 4 helyből és 2 tranzicióból álló rendszert. A helyekből egy nyelő, egy forrás és kettő belső hely. A rendszerben 6 él van az ábrán megadott módon. \ref{fig:capactiy}  A gráfban a kerek elem a helyeket, szögletes a tranziciókat jelöli. A csomópont elemben az első jel a hely kódja, a második a kapcsolódó kapacitás érték. A modellben a kisebb indexű tranzició AND tulajdonságú, a másik OR tulajdonságú. 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{images/capacity.png}
+\caption{A mintahálónk}
+\label{fig:capactiy}
+\end{figure}
 
-A rendszerben 6 (nem negatív) változó jelenik meg:  $\{0: Iv_0, 1: Iv_1, 2: Iv_2, 3: Iv_3, 4: Iv_4, 5: Iv_5\}$
+A rendszerben 6 (nem negatív) változó jelenik meg:\\
+$\{0: Iv_0, 1: Iv_1, 2: Iv_2, 3: Iv_3, 4: Iv_4, 5: Iv_5\}$
 
 Az élek indexelése:
 \begin{align*}
@@ -182,7 +189,7 @@ $C_{10}$ &: $Iv_3 - Iv_5 $&$= 0$
 \end{center}
 
 A kapcsolódó célfüggvény:
-$$1\cdot Iv_1 + -1\cdot Iv_2 + 1\cdot Iv_3 + -1\cdot Iv_4\Rightarrow \min$$
+$$1\cdot Iv_1 + -1\cdot Iv_2 + 1\cdot Iv_3 + -1\cdot Iv_4\rightarrow \min$$.
 
 Az LP feladat megoldható és a kapott megoldás:
 \begin{center}
@@ -198,7 +205,6 @@ Az LP feladat megoldható és a kapott megoldás:
 \end{center}
 Tehát a mintarendszerben nincs szükség belső pufferre. 
 Ha lecsökkentjük a második tranzició folyamerősségét, az akkor nem kapunk érvényes megoldást. \\
-Infeasible
 \begin{center}
 \begin{tabular}{rll}
 &$Iv_0$ &: $10.0$\\

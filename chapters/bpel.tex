@@ -4,7 +4,7 @@
 
 A BPEL szabvány alapjai a 2000-es évek közepén jöttek létre az üzleti folyamatok szabványos leírására, elsősorban a Web szolgáltatás (\textit{Web Service}, a továbbiakban röviden WS) alapú környezetre fókuszálva \cite{andrews2003business}. A nyelv célja definiálni az  egyes WS folyamatok vezérlését, koordinálását a kívánt üzleti logika megvalósítására.  A BPEL modell magja  a folyamatok leírására szolgál, melyekhez együttműködő partnereket szimbolizáló modulok kapcsolódhatnak. A folyamaton belüli lépéseket, végrehajtási algoritmust az aktivitási elemekkel írhatjuk le. A folyamatokhoz változók is rendelhetőek, melyek a kapcsolódó adatkezelést reprezentálják. Az egyes processz modulok üzenetváltással kommunikálhatnak egymással.   
 
-A BPEL nyelv a WS környezetből adódóan szorosan kötődik az XML alapú adattároláshoz. A BPEL modell XM állományként áll elő, melyben az egyes séma megkötéseket az XMLSchema szabvány biztosítja. Az XMLSchema nyelv lehetővé teszi az XML dokumentumok strukturális és tartalmi ellenőrzését. A sémanyelv  gazdag integritási elem készlettel rendelkezik és támogatja a típusok származtatását is. Az elemi adatkezelő műveletek, szabályok és kifejezések megadásánál az XPath szabványt kell alkalmazni.  
+A BPEL nyelv a WS környezetből adódóan szorosan kötődik az XML alapú adattároláshoz. A BPEL modell XM állományként áll elő, melyben az egyes séma megkötéseket az XMLSchema szabvány biztosítja. Az XMLSchema nyelv lehetővé teszi az XML dokumentumok strukturális és tartalmi ellenőrzését. A sémanyelv  gazdag integritási elem készlettel rendelkezik, és támogatja a típusok származtatását is. Az elemi adatkezelő műveletek, szabályok és kifejezések megadásánál az XPath szabványt kell alkalmazni.  
 
 A BPEL nyelv tulajdonságaival és alkalmazási lehetőségeivel számos kutatás foglalkozott már az elmúlt évtizedben. A BPEL nyelv nagy előnye a deklaratív formalizmus, mellyel nem szükséges  az egyes modulok kódjába beleégetni az üzleti szabályokat. Az elosztott környezet esetén fontos, hogy az egyes üzleti szabályok illeszthetőek, integrálhatóak és validálhatóak legyenek \cite{rosenberg2005business}. A BPEL modell fejlesztése ezen célkitűzések teljesítésére irányult. Több dolgozatban (például \cite{ouyang2006translating}) a BPEL nyelv, mint cél modellezési nyelv jelenik meg, s más szabvány folyamat modellezési nyelv, mint UML, BPEL-re történő konvertálását vizsgálják.   
 
@@ -35,7 +35,7 @@ BPEL nyelv kiterjesztésére is több dolgoztat született, mint például az el
 & Adatintegráció\\
 & Kifejezések és hozzárendelő utasítások\\
 & Nagy mennyiségű adat kezelése\\
-& Egyéb \\
+%& Egyéb \\
 & Szolgáltatás társítása\\
 & Szolgáltatás meghívása\\
 & Változó hozzáférés\\
