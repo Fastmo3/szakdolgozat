@@ -1,6 +1,6 @@
 \Chapter{Az üzleti folyamatok elemeinek leképzése}
 
-%TODO Ide kellene felsorolni, és részletesen leírni, hogy a BPEL egyes elemeinek milyen Petri-háló feleltethető meg.
+%TODO Ide kellene felsorolni, és részletesen leírni, hogy a BPEL egyes elemeinek milyen Petri háló feleltethető meg.
 
 %TODO Megnézni, hogy az egyes elemek esetében milyen alternatívák lennének a leképzésre!
 \Section{A leképzés menete}
@@ -195,7 +195,7 @@ Egy hátultesztelős ciklusnak feleltethető meg, amely akkor enged tovább, ha 
    <condition expressionLanguage="anyURI"?>bool-expr</condition>
 </repeatUntil>
 \end{verbatim}
-A \texttt{<while>}-al analóg módon megadható a Petri-hálós leképzése.
+A \texttt{<while>}-al analóg módon megadható a Petri hálós leképzése.
 
 \Section{\texttt{<forEach>}}
 Végig iterál a gyerekelemeken. Megadható párhuzamos feldolgozás is. Egy \textit{Complete condition} segítségével megadható egy break utasítás, ami kilép a ciklusból. 
@@ -273,7 +273,7 @@ A grafikus megjelenítése \aref{fig:flow}. ábrán látható.
 \end{figure}
 Leképzése egyszerű, hisz a megfelelő gyerek elemek nem szekvenciálisan helyezkednek el, hanem párhuzamosan.
 
-Az idáig említett leképzések az egyszerű hálóra lettek bemutatva. Színes háló esetén már sokkal összetettebb a folyamat. Ekkor ugyanis, mivel a színválasztás nem szigorúan meghatározott, a háló módosulhat a színválasztás függvényében. A legcélravezetőbb színválasztás viszont, az alap folyamat egy adott helyén előforduló item-ek más helyen történő előfordulását. Például acélgyártásnál minden olyan folyamat, ahol mozatható csille szükséges, tartalmazni fogja a "csille" színű tokent a hálóban. A színezéskor előfordulhat kettő szélsőséges eset, melyek:
+Az idáig említett leképzések az egyszerű hálóra lettek bemutatva. Színes háló esetén már sokkal összetettebb a folyamat. Ekkor ugyanis, mivel a színválasztás nem szigorúan meghatározott, a háló módosulhat a színválasztás függvényében. A legcélravezetőbb színválasztás viszont, az alap folyamat egy adott helyén előforduló item-ek más helyen történő előfordulását. Például acélgyártásnál minden olyan folyamat, ahol daruzható csille szükséges, tartalmazni fogja a "csille" színű tokent a hálóban. A színezéskor előfordulhat kettő szélsőséges eset, melyek:
 \begin{itemize}
 \item a háló minden pontja ugyan olyan színű, (ekkor a háló gyakorlatilag egyszerű háló),
 \item a háló minden pontja különböző színű, ilyenkor minden node-ra (hely és tranzició) ki kell számolni a szükséges értékeket (ugyanis nincs "átadó" folyamat, ahol az input megegezik az outputtal).
